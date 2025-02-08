@@ -4,7 +4,17 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        montserratLight: 'Montserrat-Light',
+        montserratLightItalic: 'Montserrat-LightItalic',
+        montserrat: 'Montserrat-Regular',
+        montserratItalic: 'Montserrat-Italic',
+        montserratMedium: 'Montserrat-Medium',
+        montserratSemiBold: 'Montserrat-SemiBold',
+        montserratBold: 'Montserrat-Bold',
+      },
+    },
   },
   plugins: [],
 };

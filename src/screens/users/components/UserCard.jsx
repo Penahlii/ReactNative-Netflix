@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
+    fontFamily: 'Montserrat-SemiBold', // Use of Custom Fonts
   },
   userEmail: {
     fontSize: 14,

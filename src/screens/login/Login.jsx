@@ -2,6 +2,7 @@ import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {useState} from 'react';
 import Input from './components/Input';
 import {useMMKVString} from 'react-native-mmkv';
+import Mercedes from '../../../assets/icons/mercedes.svg';
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -32,8 +33,8 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
+      <Mercedes />
       <Text style={styles.title}>Login</Text>
-
       <Input
         name="email"
         setFormData={setFormData}

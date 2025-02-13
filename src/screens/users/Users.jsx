@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View, FlatList} from 'react-native';
+import {Text, TouchableOpacity, View, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import UserCard from './components/UserCard';
@@ -24,26 +24,37 @@ const Users = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-gray-100 px-5 pt-16">
       {/* Sticky Button */}
-      <View style={styles.headerContainer}>
+      <View className="absolute top-2 left-0 right-0 z-10 items-center bg-gray-100 py-3">
         <TouchableOpacity
-          style={styles.button}
+          className="bg-blue-600 py-3 px-5 rounded-lg shadow-md mb-2"
           onPress={() => navigation.navigate('Todos')}>
-          <Text style={styles.buttonText}>Go to Todos</Text>
+          <Text className="text-white text-lg font-semibold">Go to Todos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="bg-blue-600 py-3 px-5 rounded-lg shadow-md"
+          onPress={() => navigation.navigate('Gallery')}>
+          <Text className="text-white text-lg font-semibold">
+            Go to Gallery
+          </Text>
         </TouchableOpacity>
       </View>
 
       {/* Scrollable List */}
       <FlatList
-        ListHeaderComponent={() => <Text style={styles.title}>Users</Text>}
-        contentContainerStyle={styles.listContainer}
+        ListHeaderComponent={() => (
+          <Text className="text-2xl font-bold text-gray-900 text-center mb-3">
+            Users
+          </Text>
+        )}
+        contentContainerStyle={{paddingTop: 60, paddingBottom: 20}}
         data={users}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => <UserCard user={item} />}
         ListEmptyComponent={() => (
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No users found</Text>
+          <View className="items-center mt-5">
+            <Text className="text-lg text-gray-500">No users found</Text>
           </View>
         )}
       />
@@ -52,60 +63,3 @@ const Users = () => {
 };
 
 export default Users;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-    paddingHorizontal: 20,
-    paddingTop: 60,
-  },
-  headerContainer: {
-    position: 'absolute',
-    top: 10,
-    left: 0,
-    right: 0,
-    zIndex: 10,
-    alignItems: 'center',
-    backgroundColor: '#F9F9F9',
-    paddingVertical: 10,
-  },
-  button: {
-    backgroundColor: '#007BFF',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#FFF',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  listContainer: {
-    gap: 16,
-    paddingTop: 60,
-    paddingBottom: 20,
-  },
-  emptyContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  emptyText: {
-    fontSize: 16,
-    color: '#666',
-  },
-});

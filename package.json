@@ -21,7 +21,6 @@
     "react-native-image-picker": "^8.0.0",
     "react-native-mmkv": "^3.2.0",
     "react-native-permissions": "^5.2.5",
-    "react-native-reanimated": "^3.16.7",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "^4.6.0",
     "react-native-svg": "^15.11.1",

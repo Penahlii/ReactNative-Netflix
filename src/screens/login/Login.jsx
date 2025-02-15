@@ -11,7 +11,7 @@ const Login = () => {
   const login = async () => {
     try {
       const response = await fetch(
-        'http://192.168.1.110:5001/api/v1/auth/login',
+        'http://192.168.1.107:5001/api/v1/auth/login',
         {
           method: 'POST',
           headers: {

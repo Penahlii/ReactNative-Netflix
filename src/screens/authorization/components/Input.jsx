@@ -24,17 +24,16 @@ const Input = ({name, placeholder, value, setFormData}) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   input: {
-    height: 50,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 10,
+    height: 48,
+    backgroundColor: '#333333',
+    borderRadius: 4,
     paddingHorizontal: 16,
-    fontSize: 16,
-    color: '#333',
-    borderWidth: 1,
-    borderColor: '#DDD',
+    fontSize: 15,
+    color: '#FFFFFF',
+    width: '100%',
   },
 });
 

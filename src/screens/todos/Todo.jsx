@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import Input from '../login/components/Input';
+import Input from '../authorization/components/Input';
 
 const Todo = () => {
   const [todo, setTodo] = useState({});

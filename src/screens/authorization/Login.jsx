@@ -4,27 +4,27 @@ import Input from './components/Input';
 import {useMMKVString} from 'react-native-mmkv';
 import Logo from '../../../assets/icons/logo.svg';
 import Button from './components/Button';
+import {IP_URL} from '@env';
 
 const Login = ({navigation}) => {
   const [formData, setFormData] = useState({});
   const [token, setToken] = useMMKVString('token');
+  const [email, setEmail] = useMMKVString('email');
 
   const login = async () => {
     try {
-      const response = await fetch(
-        'http://192.168.1.100:5001/api/v1/auth/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(formData),
+      const response = await fetch(`${IP_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-      );
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         const data = await response.json();
+        setEmail(formData.email);
         setToken(data.token);
       }
     } catch (error) {
@@ -53,7 +53,7 @@ const Login = ({navigation}) => {
           placeholder="Password"
         />
 
-        <Button title="Sign In" onPress={login} />
+        <Button fontFamily="Roboto-Regular" title="Sign In" onPress={login} />
 
         <View style={styles.signUpContainer}>
           <Text style={styles.signUpText}>New to Netflix? </Text>
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '500',
     marginBottom: 30,
+    fontFamily: 'Roboto-Regular',
   },
   signInButton: {
     width: '100%',
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
   signUpLink: {
     color: '#FFFFFF',
     fontSize: 15,
+    fontFamily: 'Roboto-Regular',
   },
 });
 

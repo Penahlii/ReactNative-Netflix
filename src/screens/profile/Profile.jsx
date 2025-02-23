@@ -1,16 +1,23 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {storage} from '../../store/Store';
+import Logo from '../../../assets/icons/logo.svg';
+import {useMMKVString} from 'react-native-mmkv';
 
 const Profile = () => {
+  const [username, setUsername] = useMMKVString('username');
+
   const signOut = () => {
+    storage.delete('username');
+    storage.delete('email');
     storage.delete('token');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
-
+      <View style={styles.logoContainer}>
+        <Logo width={100} height={40} />
+      </View>
       <TouchableOpacity style={styles.button} onPress={signOut}>
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
@@ -23,16 +30,11 @@ export default Profile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#000000',
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 24,
+  logoContainer: {
+    paddingHorizontal: 20,
+    marginTop: 20,
   },
   button: {
     marginTop: 12,

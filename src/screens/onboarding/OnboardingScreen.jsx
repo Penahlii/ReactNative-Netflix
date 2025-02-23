@@ -1,13 +1,11 @@
 import {
-  Image,
-  ImageBackground,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   StatusBar,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
 import Download from '../../../assets/icons/onboarding/download.svg';
@@ -53,75 +51,72 @@ const OnboardingScreen = () => {
   const navigation = useNavigation();
   const swiperRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [openedAppFirst, setOpenedAppFirst] = useMMKVBoolean('openedAppFirst');
+  const [isOnboardingCompleted, setIsOnboardingCompleted] = useMMKVBoolean(
+    'isOnboardingCompleted',
+  );
 
   const handleNext = () => {
     if (currentIndex === slides.length - 1) {
-      setOpenedAppFirst(false);
-      // TODO: Navigate to your next screen here
-      // For example:
-      // navigation.navigate('Login');
-      console.log('Last slide - Navigate to next screen');
+      setIsOnboardingCompleted(true);
+      navigation.navigate('SignIn');
     } else {
       swiperRef.current.scrollBy(1);
     }
   };
 
-  // useEffect(() => {
-  //   navigation.navigate('Users');
-  // }, [openedAppFirst]);
-
   return (
-    <>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="black"
-        translucent={true}
-      />
-      <Swiper
-        ref={swiperRef}
-        autoplay={true}
-        autoplayTimeout={3}
-        showsPagination={true}
-        loop={false}
-        paginationStyle={styles.pagination}
-        dotStyle={styles.dot}
-        activeDotStyle={styles.activeDot}
-        onIndexChanged={index => setCurrentIndex(index)}>
-        {slides.map(slide => (
-          <View
-            key={slide.id}
-            style={[
-              styles.slideContainer,
-              {
-                backgroundColor: 'black',
-              },
-            ]}>
-            <View style={styles.header}>
-              <View style={styles.logoContainer}>
-                <Logo width={100} height={40} />
+    !isOnboardingCompleted && (
+      <>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="black"
+          translucent={true}
+        />
+        <Swiper
+          ref={swiperRef}
+          autoplay={true}
+          autoplayTimeout={3}
+          showsPagination={true}
+          loop={false}
+          paginationStyle={styles.pagination}
+          dotStyle={styles.dot}
+          activeDotStyle={styles.activeDot}
+          onIndexChanged={index => setCurrentIndex(index)}>
+          {slides.map(slide => (
+            <View
+              key={slide.id}
+              style={[
+                styles.slideContainer,
+                {
+                  backgroundColor: 'black',
+                },
+              ]}>
+              <View style={styles.header}>
+                <View style={styles.logoContainer}>
+                  <Logo width={100} height={40} />
+                </View>
+                <Text style={styles.helpText}>Help</Text>
               </View>
-              <Text style={styles.helpText}>Help</Text>
-            </View>
-            {slide.background !== 'black' && (
-              <View style={styles.backgroundSvg}>
-                <Films width="100%" height="100%" />
+              {slide.background !== 'black' && (
+                <View style={styles.backgroundSvg}>
+                  <Films width="100%" height="100%" />
+                </View>
+              )}
+              <View style={styles.contentContainer}>
+                <View style={styles.imageContainer}>{slide.image}</View>
+                <Text style={styles.title}>{slide.title}</Text>
+                <Text style={styles.description}>{slide.description}</Text>
               </View>
-            )}
-            <View style={styles.contentContainer}>
-              <View style={styles.imageContainer}>{slide.image}</View>
-              <Text style={styles.title}>{slide.title}</Text>
-              <Text style={styles.description}>{slide.description}</Text>
+              <View style={styles.nextButtonContainer}>
+                <TouchableOpacity onPress={handleNext}>
+                  <Text style={styles.nextButton}>NEXT</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.nextButtonContainer}>
-              <TouchableOpacity onPress={handleNext}>
-                <Text style={styles.nextButton}>NEXT</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ))}
-      </Swiper>
-    </>
+          ))}
+        </Swiper>
+      </>
+    )
   );
 };
 
@@ -179,12 +174,14 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 20,
     textAlign: 'center',
+    fontFamily: 'Roboto-Regular',
   },
   description: {
     fontSize: 16,
     color: '#e5e5e5',
     textAlign: 'center',
     lineHeight: 24,
+    fontFamily: 'Roboto-Regular',
   },
   nextButtonContainer: {
     width: '100%',

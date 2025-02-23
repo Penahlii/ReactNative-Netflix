@@ -3,25 +3,26 @@ import React, {useState} from 'react';
 import Logo from '../../../assets/icons/logo.svg';
 import Input from './components/Input';
 import Button from './components/Button';
+import {IP_URL} from '@env';
+import {useMMKVString} from 'react-native-mmkv';
 
 const SignUp = ({navigation}) => {
   const [formData, setFormData] = useState({});
+  const [username, setUsername] = useMMKVString('username');
 
   const signup = async () => {
     try {
-      const response = await fetch(
-        'http://192.168.1.100:5001/api/v1/auth/signup',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(formData),
+      const response = await fetch(`${IP_URL}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-      );
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
+        setUsername(formData.username);
         navigation.navigate('SignIn');
       }
     } catch (error) {
@@ -62,7 +63,9 @@ const SignUp = ({navigation}) => {
 
         <View style={styles.signInContainer}>
           <Text style={styles.signInText}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+          <TouchableOpacity
+            fontFamily="Roboto-Regular"
+            onPress={() => navigation.navigate('SignIn')}>
             <Text style={styles.signInLink}>Sign in</Text>
           </TouchableOpacity>
         </View>
@@ -104,9 +107,11 @@ const styles = StyleSheet.create({
   signInText: {
     color: '#737373',
     fontSize: 15,
+    fontFamily: 'Roboto-Regular',
   },
   signInLink: {
     color: '#FFFFFF',
     fontSize: 15,
+    fontFamily: 'Roboto-Regular',
   },
 });

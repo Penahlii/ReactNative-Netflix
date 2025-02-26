@@ -20,10 +20,8 @@ const CustomFlatList = ({header, data, type}) => {
       const updatedPosters = {};
       for (const item of data) {
         try {
-          const response = await fetch(`${IP_URL}/${type}/${item.id}/details`);
-          const details = await response.json();
-          updatedPosters[item.id] = details.content.poster_path
-            ? `${IMG_URL}${details.content.poster_path}`
+          updatedPosters[item.id] = item.poster_path
+            ? `${IMG_URL}${item.poster_path}`
             : null;
         } catch (error) {
           console.error(`Error fetching poster for ${item.id}:`, error);

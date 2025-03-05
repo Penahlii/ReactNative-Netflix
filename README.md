@@ -3,7 +3,8 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
-> > **Note**: You need to start Backend Project: https://github.com/ilkin-ibadov/netflix-back.git (Step 1: npm i, Step 2: npm start).
+> **Note**: You need to start Backend Project: https://github.com/ilkin-ibadov/netflix-back.git (Step 1: npm i, Step 2: npm start).
+> **Note**: In ENV change localhost with your IPv4 Address
 
 ## Step 1: Start Metro
 
